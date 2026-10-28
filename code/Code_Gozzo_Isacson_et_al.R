@@ -950,11 +950,14 @@ res_diet <- results(dsq, name = "diet_D6_vs_D4")
 ############################## ############################## Load data from Supp Material   ############################## ##############################
 ############################## ############################## ############################## ############################## ##############################
 
+path <- "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material.xls"
+
+
 ############################## ##############################         sRNA from sup.tab     ############################## ##############################
 
 
 
-st <- as.data.frame(read_excel(path="C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material.xlsx", sheet="TableS1", skip=3))
+st <- as.data.frame(read_excel(path = path , sheet="TableS1", skip=3))
 rownames(st)<-st$...1
 st <- st[,-1]
 
@@ -1014,7 +1017,7 @@ metadata_sperm <- pac_master@Pheno
 
 
 
-st <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS3", skip = 3))
+st <- as.data.frame(read_excel(path = path, sheet = "TableS3", skip = 3))
 rownames(st)<-st$GeneID
 st <- st[,-1]
 
@@ -1043,7 +1046,7 @@ metadata_testes <- pac_master@Pheno
 
 
 
-st <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS4", skip = 3))
+st <- as.data.frame(read_excel(path = path, sheet = "TableS4", skip = 3))
 rownames(st)<-st$GeneID
 st <- st[,-1]
 
@@ -1059,8 +1062,8 @@ metadata_embryo_RNAi <- pac_master@Pheno
 colnames(metadata_embryo_RNAi)[colnames(metadata_embryo_RNAi) == "Geno"] <- "genotype"
 
 
-res_Piwi <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS5", skip = 3))
-res_Aub <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS6", skip = 3))
+res_Piwi <- as.data.frame(read_excel(path = path, sheet = "TableS5", skip = 3))
+res_Aub <- as.data.frame(read_excel(path = path, sheet = "TableS6", skip = 3))
 
 rownames(res_Piwi)<-res_Piwi$GeneID
 res_Piwi <- res_Piwi[,-1]
@@ -1071,7 +1074,7 @@ res_Aub <- res_Aub[,-1]
 
 ############################## ##############################         Dietembryo seq from sup.tab    ############################## ##############################
 
-st <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS9", skip = 3))
+st <- as.data.frame(read_excel(path = path , sheet = "TableS9", skip = 3))
 rownames(st)<-st$GeneID
 st <- st[,-1]
 
@@ -1084,7 +1087,7 @@ pac_master@norm$cpm <- pac_master@Counts
 diet_embryo_df <- pac_master@norm$cpm
 metadata_diet_embryo <- pac_master@Pheno
 
-res_diet_embryo <- as.data.frame(read_excel(path = "C:/Users/alego91/OneDrive - Linköpings universitet/Anita Öst's files - 4_piwi story/TOPSECRET_piwiproject/Figures/Supplementary Material 2.xls", sheet = "TableS11", skip = 3))
+res_diet_embryo <- as.data.frame(read_excel(path = path, sheet = "TableS11", skip = 3))
 
 rownames(res_diet_embryo)<-res_diet_embryo$GeneID
 res_diet_embryo <- res_diet_embryo[,-1]
@@ -1208,29 +1211,32 @@ pac_rRNA <- PAC_filter(pac_mitos, anno_target = list("mt_class", "rRNA"))
 
 
 sizedist_plots_pro <- PAC_sizedist(pac_pro, 
-                               anno_target=list("mt_class"),
-                               pheno_target = list("Geno"),
-                               summary_target=list("cpmMeans_Geno"),
-                               ymax =3000)
+                                   anno_target=list("mt_class"),
+                                   pheno_target = list("Geno"),
+                                   summary_target=list("cpmMeans_Geno"),
+                                   ymax =3000)
 
 sizedist_plots_tRNA <- PAC_sizedist(pac_tRNA, 
-                               anno_target=list("mt_class"),
-                               pheno_target = list("Geno"),
-                               summary_target=list("cpmMeans_Geno"),
-                               ymax =3000)
+                                    anno_target=list("mt_class"),
+                                    pheno_target = list("Geno"),
+                                    summary_target=list("cpmMeans_Geno"),
+                                    ymax =3000)
 
 sizedist_plots_rRNA <- PAC_sizedist(pac_rRNA, 
-                               anno_target=list("mt_class"),
-                               pheno_target = list("Geno"),
-                               summary_target=list("cpmMeans_Geno"),
-                               ymax =3000)
+                                    anno_target=list("mt_class"),
+                                    pheno_target = list("Geno"),
+                                    summary_target=list("cpmMeans_Geno"),
+                                    ymax =3000)
 
-PAC_pie(pac_pro, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno") )
-PAC_pie(pac_tRNA, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno") )
-PAC_pie(pac_rRNA, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno") )
+PAC_pie(pac_pro, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno"))
+PAC_pie(pac_tRNA, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno"))
+PAC_pie(pac_rRNA, anno_target = list("Biotypes_mis3"),summary_target=list("cpmMeans_Geno"))
 
 
 #################### FIG 1E and 1SA #############################################################
+
+Anno_df <- pac_mitos@Anno %>%
+  rownames_to_column("sequence")
 
 pac_mitos@Anno <- Anno_df %>%
   column_to_rownames("sequence")
@@ -1314,6 +1320,39 @@ ggplot(
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
+cpm_filtered <- cpm_long %>%
+  filter(Biotypes_mis3 %in% c("piRNA", "from_gene")) %>%
+  group_by(Gene_target) %>%
+  filter(n_distinct(Biotypes_mis3) == 2) %>%
+  ungroup()
+
+shapiro_res <- cpm_filtered %>%
+  group_by(Gene_target, Biotypes_mis3) %>%
+  summarise(
+    n = sum(!is.na(sum_cpm)),
+    shapiro_p = if (n >= 3 && n <= 5000) {
+      shapiro.test(sum_cpm[!is.na(sum_cpm)])$p.value
+    } else {
+      NA_real_
+    },
+    .groups = "drop"
+  )
+ggplot(cpm_filtered, aes(x = sum_cpm, fill = Biotypes_mis3)) +
+  geom_histogram(
+    bins = 20,
+    alpha = 0.7,
+    color = "black"
+  ) +
+  facet_grid(Gene_target ~ Biotypes_mis3, scales = "free") +
+  theme_bw() +
+  labs(
+    x = "CPM",
+    y = "Frequency",
+    title = "Distribution of CPM by gene target and biotype"
+  ) +
+  theme(
+    legend.position = "none"
+  )
 
 stats_res <- cpm_long %>%
   filter(Biotypes_mis3 %in% c("piRNA", "from_gene")) %>%
@@ -1444,6 +1483,39 @@ sum_df$genotype <- factor(
   levels = c("GFP", "Piwi", "Aub")
 )
 
+shapiro_res <- sum_df %>%
+  group_by(genotype) %>%
+  summarise(
+    n = sum(!is.na(sum_expr)),
+    shapiro_p = if (n >= 3 && n <= 5000 &&
+                    n_distinct(sum_expr, na.rm = TRUE) > 1) {
+      shapiro.test(sum_expr[!is.na(sum_expr)])$p.value
+    } else {
+      NA_real_
+    },
+    .groups = "drop"
+  )
+
+shapiro_res
+
+
+ggplot(sum_df, aes(x = sum_expr, fill = genotype)) +
+  geom_histogram(
+    bins = 10,
+    color = "black",
+    alpha = 0.7
+  ) +
+  facet_wrap(~ genotype, scales = "free") +
+  theme_bw() +
+  labs(
+    x = "Total CPM",
+    y = "Frequency",
+    title = "Distribution of total sperm mitosRNA CPM (D4)"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+
 anova_res <- aov(sum_expr ~ genotype, data = sum_df)
 
 tukey_res <- TukeyHSD(anova_res)
@@ -1516,7 +1588,7 @@ sample_sums <- colSums(testes_df_D4)
 
 sum_df <- data.frame(
   sample = common_samples,
-  genotype = metadata_testes_D4[common_samples, "Geno"],
+  genotype = metadata_testes_D4[common_samples, "genotype"],
   sum_expr = sample_sums[common_samples]
 )
 
@@ -1524,6 +1596,40 @@ sum_df$genotype <- factor(
   sum_df$genotype,
   levels = c("GFP", "Piwi", "Aub")
 )
+
+shapiro_res <- sum_df %>%
+  group_by(genotype) %>%
+  summarise(
+    n = sum(!is.na(sum_expr)),
+    shapiro_p = if (n >= 3 && n <= 5000 &&
+                    n_distinct(sum_expr, na.rm = TRUE) > 1) {
+      shapiro.test(sum_expr[!is.na(sum_expr)])$p.value
+    } else {
+      NA_real_
+    },
+    .groups = "drop"
+  )
+
+shapiro_res
+
+ggplot(sum_df, aes(x = sum_expr, fill = genotype)) +
+  geom_histogram(
+    bins = 10,
+    color = "black",
+    alpha = 0.7
+  ) +
+  facet_wrap(~ genotype, scales = "free") +
+  theme_bw() +
+  labs(
+    x = "Total mitochondrial mRNA expression",
+    y = "Frequency",
+    title = "Distribution of mitochondrial mRNA expression (D4)"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+
+
 
 anova_res <- aov(sum_expr ~ genotype, data = sum_df)
 
@@ -2364,7 +2470,7 @@ for (module_name in names(modules)) {
     
     print(pairwise_stats)
   }
-
+  
   y_max <- max(plot_df$expression_sum, na.rm = TRUE)
   y_min <- min(plot_df$expression_sum, na.rm = TRUE)
   y_range <- y_max - y_min
@@ -2428,7 +2534,34 @@ for (module_name in names(modules)) {
 }
 
 
+qq_data <- imap_dfr(modules, function(genes, module_name) {
+  
+  genes_present <- intersect(genes, rownames(RNAi_embryo_df_no_mt))
+  
+  df <- data.frame(
+    sample         = colnames(RNAi_embryo_df_no_mt),
+    genotype       = factor(metadata_embryo_RNAi$genotype,
+                            levels = c("GFP", "Piwi", "Aub")),
+    expression_sum = colSums(RNAi_embryo_df_no_mt[genes_present, , drop = FALSE]),
+    Module         = module_name,
+    row.names      = NULL
+  )
+  
+  m <- lm(expression_sum ~ genotype, data = df)
+  df$fitted <- fitted(m)
+  df$resid  <- rstandard(m)
+  df
+})
 
+# QQ plot of standardized residuals, one panel per module
+p_qq <- ggplot(qq_data, aes(sample = resid)) +
+  stat_qq_line(color = "black", linewidth = 0.5) +
+  stat_qq(aes(color = genotype), size = 2, alpha = 0.8) +
+  facet_wrap(~ Module, scales = "free", nrow = 1) +
+  labs(x = "Theoretical quantiles", y = "Standardized residuals", color = "Genotype") +
+  theme_bw(base_size = 14)
+
+p_qq
 ######################### FIG S3 A #############################################
 
 mt_genes <- grep(
@@ -2782,6 +2915,9 @@ p +
 
 ######################### FIG 4B ###############################################
 
+rownames(testes_df) <- testes_df$gene
+testes_df <- testes_df[, -which(names(testes_df) == "gene")]
+
 testes_df_mt <- testes_df[grep("^mt:", rownames(testes_df), ignore.case = FALSE), ]
 testes_df_mt[] <- lapply(
   testes_df_mt,
@@ -2934,21 +3070,28 @@ ggplot(
 
 ######################### FIG 4D ########################################################
 
-#sperm sRNA
-CPM <- pac_master@summary$cpmMeans_Geno_diet
-CPM_sample <- pac_master@norm$cpm
+# Sperm sRNA
+CPM <- sperm_df
 
-metadata <- pac_master@Pheno
-anno <- pac_master@Anno
-
+metadata <- metadata_sperm
+anno <- ano
 
 plot_df <- as.data.frame(CPM) %>%
   rownames_to_column("sequence") %>%
   pivot_longer(
-    -sequence,
-    names_to = c("Geno", "diet"),
-    names_sep = "_(?=D)",   # split before D4/D6
+    cols = -sequence,
+    names_to = "Sample_ID",
     values_to = "CPM"
+  ) %>%
+  left_join(
+    metadata %>%
+      dplyr::select(Sample_ID, Geno, diet),
+    by = "Sample_ID"
+  ) %>%
+  group_by(sequence, Geno, diet) %>%
+  summarise(
+    CPM = mean(CPM, na.rm = TRUE),
+    .groups = "drop"
   ) %>%
   pivot_wider(
     names_from = diet,
@@ -2999,6 +3142,7 @@ ggplot(plot_df,
 
 
 ######################### FIG 4E ########################################################
+#from processing sperm data
 
 res_gfp_diet_sperm$genome <- anno$genome[
   match(rownames(res_gfp_diet_sperm), rownames(anno))
@@ -3238,7 +3382,7 @@ pac_pc2 <- PAC_filter(x, anno_target = list("PC2_top100", TRUE))
 
 mean_CPM <- pac_master@summary$cpmMeans_Geno_diet
 
-GFP_D4_CPM <- mean_CPM[, "GFP RNAi_D4"]
+GFP_D4_CPM <- mean_CPM[, "GFP_D4"]
 
 
 
@@ -3306,6 +3450,7 @@ p_pc2
 
 
 ######################### FIG S4 C, D and E ########################################################
+#from processing sperm data
 
 res_piwi_plot <- res_piwi_sperm[order(res_piwi_sperm$genome == "mt"), ]
 
@@ -3547,7 +3692,7 @@ EnhancedVolcano(res_diet_embryo,
 ######################### FIG 5C ########################################################
 
 high_D6 <- rownames(res_diet_embryo[res_diet_embryo$log2FoldChange > 1 & 
-                               res_diet_embryo$padj < 0.1, ])
+                                      res_diet_embryo$padj < 0.1, ])
 
 low_D6  <- rownames(res_diet_embryo[res_diet_embryo$log2FoldChange < -1 & 
                                       res_diet_embryo$padj < 0.1, ])
@@ -3556,7 +3701,7 @@ low_D6  <- rownames(res_diet_embryo[res_diet_embryo$log2FoldChange < -1 &
 
 gse_down <- enrichGO(
   gene          = low_D6 ,
-  universe = rownames(res_diet),
+  universe = rownames(res_diet_embryo),
   OrgDb         = organism,
   keyType       = "SYMBOL",
   ont           = "ALL",
@@ -3566,7 +3711,7 @@ gse_down <- enrichGO(
 
 gse_up <- enrichGO(
   gene          = high_D6 ,
-  universe = rownames(res_diet),
+  universe = rownames(res_diet_embryo),
   OrgDb         = organism,
   keyType       = "SYMBOL",
   ont           = "ALL",
@@ -3772,3 +3917,281 @@ for (module_name in names(modules)) {
   
   print(p)
 }
+
+######################### FIG 5 S B ########################################################
+
+
+
+
+mt_genes <- grep(
+  "^mt:",
+  rownames(diet_embryo_df),
+  value = TRUE,
+  ignore.case = FALSE
+)
+
+diet_embryo_df_mt <- diet_embryo_df[mt_genes, , drop = FALSE]
+
+diet_embryo_df_mt[] <- lapply(
+  diet_embryo_df_mt,
+  as.numeric
+)
+
+df_long <- as.data.frame(diet_embryo_df_mt) |>
+  rownames_to_column("gene") |>
+  pivot_longer(
+    cols = -gene,
+    names_to = "sample",
+    values_to = "expression"
+  ) |>
+  left_join(
+    data.frame(
+      sample = rownames(metadata_diet_embryo),
+      diet = metadata_diet_embryo$diet
+    ),
+    by = "sample"
+  ) |>
+  mutate(
+    gene = as.character(gene),
+    expression = as.numeric(expression),
+    diet = factor(
+      diet,
+      levels = c("D4", "D6")
+    )
+  ) %>%
+  filter(!is.na(diet))
+
+df_summary <- df_long %>%
+  group_by(gene, diet) %>%
+  summarise(
+    mean_expression = mean(expression, na.rm = TRUE),
+    sd_expression = sd(expression, na.rm = TRUE),
+    n = sum(!is.na(expression)),
+    sem = sd_expression / sqrt(n),
+    .groups = "drop"
+  )
+
+gene_order <- df_summary %>%
+  filter(diet == "D4") %>%
+  arrange(desc(mean_expression)) %>%
+  pull(gene)
+
+df_long <- df_long %>%
+  mutate(
+    gene = factor(
+      gene,
+      levels = gene_order
+    )
+  )
+
+normality <- df_long %>%
+  group_by(gene, diet) %>%
+  filter(sum(!is.na(expression)) >= 3) %>%
+  shapiro_test(expression)
+
+gene_normality <- normality %>%
+  group_by(gene) %>%
+  summarise(
+    all_normal = n() == 2 & all(!is.na(p) & p > 0.05),
+    .groups = "drop"
+  )
+
+pairwise_results <- list()
+
+for (g in levels(df_long$gene)) {
+  
+  dat <- df_long %>%
+    filter(gene == g)
+  
+  is_normal <- gene_normality %>%
+    filter(gene == g) %>%
+    pull(all_normal)
+  
+  if (length(is_normal) == 0 || is.na(is_normal)) {
+    next
+  }
+  
+  if (is_normal) {
+    
+    pairwise <- dat %>%
+      t_test(expression ~ diet) %>%
+      mutate(method = "Welch t-test")
+    
+  } else {
+    
+    pairwise <- dat %>%
+      wilcox_test(expression ~ diet) %>%
+      mutate(method = "Wilcoxon rank-sum")
+  }
+  
+  pairwise_results[[as.character(g)]] <- pairwise
+}
+
+pairwise_results <- bind_rows(
+  pairwise_results,
+  .id = "gene"
+) %>%
+  mutate(
+    gene = as.character(gene),
+    p.adj = p.adjust(p, method = "BH"),
+    significance = case_when(
+      p.adj <= 0.0001 ~ "****",
+      p.adj <= 0.001  ~ "***",
+      p.adj <= 0.01   ~ "**",
+      p.adj <= 0.05   ~ "*",
+      TRUE            ~ "ns"
+    )
+  )
+
+
+y_positions <- df_long %>%
+  mutate(
+    gene = as.character(gene)
+  ) %>%
+  group_by(gene) %>%
+  summarise(
+    ymax = max(expression, na.rm = TRUE),
+    ymin = min(expression, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    range = ymax - ymin,
+    step = case_when(
+      range > 0 ~ range * 0.18,
+      ymax > 0 ~ ymax * 0.15,
+      TRUE ~ 0.2
+    )
+  )
+
+pairwise_sig <- pairwise_results %>%
+  filter(p.adj <= 0.05) %>%
+  left_join(
+    y_positions,
+    by = "gene"
+  ) %>%
+  group_by(gene) %>%
+  arrange(
+    factor(group1, levels = c("D4", "D6")),
+    factor(group2, levels = c("D4", "D6"))
+  ) %>%
+  mutate(
+    y.position = ymax + row_number() * step
+  ) %>%
+  ungroup() %>%
+  mutate(
+    gene = factor(
+      gene,
+      levels = gene_order
+    ),
+    xmin = case_when(
+      group1 == "D4" ~ 1,
+      group1 == "D6" ~ 2
+    ),
+    xmax = case_when(
+      group2 == "D4" ~ 1,
+      group2 == "D6" ~ 2
+    )
+  )
+
+brackets_horizontal <- pairwise_sig %>%
+  transmute(
+    gene,
+    xmin,
+    xmax,
+    y = y.position
+  )
+
+brackets_vertical <- bind_rows(
+  pairwise_sig %>%
+    transmute(
+      gene,
+      x = xmin,
+      y = y.position,
+      yend = y.position - step * 0.25
+    ),
+  pairwise_sig %>%
+    transmute(
+      gene,
+      x = xmax,
+      y = y.position,
+      yend = y.position - step * 0.25
+    )
+)
+
+star_positions <- pairwise_sig %>%
+  mutate(
+    x = (xmin + xmax) / 2,
+    y = y.position + step * 0.12
+  )
+
+ggplot(
+  df_long,
+  aes(
+    x = diet,
+    y = expression,
+    fill = diet
+  )
+) +
+  geom_boxplot(
+    width = 0.6,
+    outlier.shape = NA
+  ) +
+  geom_jitter(
+    width = 0.12,
+    size = 1.5,
+    alpha = 0.7
+  ) +
+  geom_segment(
+    data = brackets_horizontal,
+    aes(
+      x = xmin,
+      xend = xmax,
+      y = y,
+      yend = y
+    ),
+    inherit.aes = FALSE,
+    linewidth = 0.4
+  ) +
+  geom_segment(
+    data = brackets_vertical,
+    aes(
+      x = x,
+      xend = x,
+      y = y,
+      yend = yend
+    ),
+    inherit.aes = FALSE,
+    linewidth = 0.4
+  ) +
+  geom_text(
+    data = star_positions,
+    aes(
+      x = x,
+      y = y,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    size = 5
+  ) +
+  facet_wrap(
+    ~ gene,
+    scales = "free_y",
+    ncol = 6
+  ) +
+  scale_x_discrete(
+    limits = c("D4", "D6")
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0.05, 0.20))
+  ) +
+  theme_bw() +
+  labs(
+    x = "Diet",
+    y = "Expression (TPM)",
+    fill = "Diet"
+  ) +
+  theme(
+    strip.text = element_text(face = "bold"),
+    legend.position = "top"
+  )
+
